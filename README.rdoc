@@ -1,0 +1,5 @@
+= puppet-role module
+
+{<img src='https://codex.cegeka.be/jenkins/job/puppet-role/badge/icon' />}[https://codex.cegeka.be/jenkins/job/puppet-role/]
+
+This is the role module.
