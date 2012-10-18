@@ -24,7 +24,7 @@ task :style do
     end
   end
 
-  FileList['**/*.pp'].each do |puppet_file|
+  FileList['{manifests,tests,examples}/**/*.pp'].each do |puppet_file|
     puts "Evaluating code style for #{puppet_file}"
     linter.file = puppet_file
     linter.run

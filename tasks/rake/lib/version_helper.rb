@@ -15,7 +15,7 @@ class VersionHelper
 		return package_version + "+build." + ENV['BUILD_NUMBER'] + "." + ENV['GIT_COMMIT'][0,10]
 	end
 
-	private	
+	private
 	def package_version
     @module_file.each_line do |line|
       if line.match(/version/)

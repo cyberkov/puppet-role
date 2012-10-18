@@ -1,0 +1,45 @@
+require 'acceptance/spec_helper'
+
+describe 'Default node for oracle' do
+
+  context "when node definition is sudoers" do
+
+    context "Checking user alias" do
+      sudoers_entry = "User_Alias ORADM = oracle"
+
+      it "should contain #{sudoers_entry}" do
+      	return_code = @env.vms[:puppetnode2].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+      	return_code.should eql(0)
+      end
+    end
+
+    context "Checking command alias" do
+      sudoers_entry = "Cmnd_Alias ADM = /bin/su"
+
+      it "should contain #{sudoers_entry}" do
+        return_code = @env.vms[:puppetnode2].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code.should eql(0)
+      end
+    end
+
+    context "Checking ORADM" do
+      sudoers_entry = "ORADM   ALL = ADM"
+
+      it "should contain #{sudoers_entry}" do
+        return_code = @env.vms[:puppetnode2].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code.should eql(0)
+      end
+    end
+
+    context "Checking oracle" do
+      sudoers_entry = "oracle ALL = NOPASSWD: MP,RESCAN"
+
+      it "should contain #{sudoers_entry}" do
+        return_code = @env.vms[:puppetnode2].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code.should eql(0)
+      end
+    end
+
+  end
+
+end
