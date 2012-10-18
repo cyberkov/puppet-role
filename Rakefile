@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'rake'
 
 task_dir = File.expand_path("../tasks", __FILE__)
 

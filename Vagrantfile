@@ -22,8 +22,8 @@ Vagrant::Config.run do |config|
     master.vmhosts.list = hosts
     master.vm.share_folder("v-root", "/vagrant", ".", :owner => "puppet", :group => "puppet")
     master.vm.provision :puppet, :pp_path => "/tmp/vagrant-puppet", :facter => { "test" => ENV['test'], "version" => ENV['version'] } do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.manifest_file = "provision.pp"
+      puppet.manifests_path = "."
+      puppet.manifest_file = "spec/acceptance/fixtures/manifests/provision.pp"
       puppet.options = [ "--verbose", "--reportdir", "/vagrant/target/reports" ]
     end
   end

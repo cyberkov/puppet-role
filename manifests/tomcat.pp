@@ -1,3 +1,4 @@
+# Class: role::tomcat
 class role::tomcat {
 
   stage { 'pre': before => Stage['main'] }

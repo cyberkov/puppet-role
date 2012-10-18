@@ -1,7 +1,6 @@
 gem 'fpm', '<=0.3.11'
 require 'fpm'
 require 'fpm/program'
-require 'pp'
 
 $:.unshift(File.join(File.dirname(__FILE__), '..'))
 require 'version_helper'
@@ -16,8 +15,8 @@ class BasePackager
     @basedirectory = ENV['WORKSPACE']
 		@semver_version = version_helper.semver_version
 		@release = "1"
-    @package_type = package_type 
-    
+    @package_type = package_type
+
     case package_type
     when "rpm"
       @first_delimiter, @second_delimiter, @architecture = "-", ".", "noarch"
@@ -37,7 +36,7 @@ class BasePackager
       ENV['GIT_COMMIT'] = "54b0c58c7ce9f2a8b551351102ee0938"[0,10]
     end
   end
- 
+
   def build(module_name)
 		ENV["#{ENV['JOB_NAME']}_semver_version"] = @semver_version
     package_name = "cegeka-puppet-#{module_name}"
@@ -50,7 +49,7 @@ class BasePackager
 		exclude_arguments = ["-x", ".git", "-x", ".gitignore", "-x", "tasks", "-x", "Rakefile", "-x", "target", "-x", ".project", "-x", ".puppet-lintrc"]
     var_arguments = ["-n", package_name, "-v", @semver_version, "--iteration", @release, "--url", url, "--description", description, "-C", @basedirectory, module_name]
     arguments = static_arguments + exclude_arguments + var_arguments
-    
+
     tmpdir = Dir.mktmpdir
     Dir.chdir tmpdir
     FileUtils.mkpath destination_folder

@@ -1,10 +1,10 @@
 require File.expand_path('../../env', __FILE__)
 
-$:.unshift(File.join(File.dirname(__FILE__), 'lib', 'packaging'))
-require 'rpm_packager'
-
 desc "Create RPM package from puppet module."
 task :rpm do
+  $:.unshift(File.join(File.dirname(__FILE__), 'lib', 'packaging'))
+  require 'rpm_packager'
+
   puts "Creating RPM package from puppet module..."
   module_name = ENV['JOB_NAME'].split('-')[1]
 
