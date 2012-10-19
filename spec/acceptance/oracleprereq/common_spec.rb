@@ -9,7 +9,7 @@ describe 'Default node for common' do
 
       sysadmin_tools.each { |sysadmin_tool|
         it "should contain package #{sysadmin_tool}" do
-          return_code = @env.vms[:puppetnode2].channel.sudo("rpm -q #{sysadmin_tool}")
+          return_code = @env.vms[:centos5].channel.sudo("rpm -q #{sysadmin_tool}")
           return_code.should eql(0)
         end
       }
