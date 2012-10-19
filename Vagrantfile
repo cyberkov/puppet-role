@@ -28,7 +28,7 @@ Vagrant::Config.run do |config|
     end
   end
 
-  config.vm.define :puppetnode1 do |node1|
+  config.vm.define :centos6 do |node1|
     node1.vm.box = "puppetnode1-centos6-x86_64"
     node1.vm.box_url = "https://yum.cegeka.be/vagrant/baseboxes/puppetnode1-centos6-x86_64.box"
     node1.vm.network :hostonly, "172.16.0.3"
@@ -40,7 +40,7 @@ Vagrant::Config.run do |config|
     end
   end
 
-  config.vm.define :puppetnode2 do |node2|
+  config.vm.define :centos5 do |node2|
     node2.vm.box = "puppetnode2-centos5-x86_64"
     node2.vm.box_url = "https://yum.cegeka.be/vagrant/baseboxes/puppetnode2-centos5-x86_64.box"
     node2.vm.network :hostonly, "172.16.0.4"
