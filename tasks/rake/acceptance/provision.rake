@@ -17,6 +17,9 @@ namespace :acceptance do
 
     ENV['boxes'].split(',').each { |basebox|
       if ! env.vms[:"#{basebox}"].nil?
+        puts "Resuming #{basebox} ..."
+        env.cli("resume", :"#{basebox}")
+
         puts "Rolling back #{basebox} to known state..."
         env.cli("sandbox", "rollback", :"#{basebox}")
 
