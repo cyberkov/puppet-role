@@ -4,7 +4,7 @@ require File.expand_path('../../acceptance/env', __FILE__)
 namespace "jenkins" do
 
   desc "Provision the test environment and run acceptance RSpec tests"
-  task :run_acceptance_tests => [:provision] do
+  task :run_acceptance_tests => ["acceptance:provision"] do
     require 'vagrant'
 
     env = Vagrant::Environment.new(:cwd => File.expand_path('../../..', __FILE__),
