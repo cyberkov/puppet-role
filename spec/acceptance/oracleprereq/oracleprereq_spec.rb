@@ -10,7 +10,7 @@ describe 'Default node for oracle' do
 
       lib_packages.each { |lib_package|
         it "should contain package #{lib_package}" do
-          return_code = @env.vms[:centos5].channel.sudo("rpm -q #{lib_package}")
+          return_code = @platform.channel.sudo("rpm -q #{lib_package}")
           return_code.should eql(0)
 	end
       }
@@ -21,7 +21,7 @@ describe 'Default node for oracle' do
 
       build_packages.each { |build_package|
         it "should contain package #{build_package}" do
-          return_code = @env.vms[:centos5].channel.sudo("rpm -q #{build_package}")
+          return_code = @platform.channel.sudo("rpm -q #{build_package}")
           return_code.should eql(0)
         end
       }
@@ -32,7 +32,7 @@ describe 'Default node for oracle' do
 
       system_packages.each { |system_package|
         it "should contain package #{system_package}" do
-          return_code = @env.vms[:centos5].channel.sudo("rpm -q #{system_package}")
+          return_code = @platform.channel.sudo("rpm -q #{system_package}")
           return_code.should eql(0)
         end
       }
@@ -43,7 +43,7 @@ describe 'Default node for oracle' do
 
       oracle_packages.each { |oracle_package|
         it "should contain package #{oracle_package}" do
-          return_code = @env.vms[:centos5].channel.sudo("rpm -q #{oracle_package}")
+          return_code = @platform.channel.sudo("rpm -q #{oracle_package}")
           return_code.should eql(0)
         end
       }
@@ -54,7 +54,7 @@ describe 'Default node for oracle' do
 
       processes.each { |process|
         it "should have running service #{process}" do
-          return_code = @env.vms[:centos5].channel.sudo("ps -ef | grep #{process} | grep -vc grep")
+          return_code = @platform.channel.sudo("ps -ef | grep #{process} | grep -vc grep")
           return_code.should eql(0)
         end
       }
@@ -64,7 +64,7 @@ describe 'Default node for oracle' do
       oracleasm_entry = "ORACLEASM_SCANEXCLUDE=\"sd\""
 
       it "should contain #{oracleasm_entry}" do
-        return_code = @env.vms[:centos5].channel.sudo("grep '#{oracleasm_entry}' /etc/sysconfig/oracleasm 2> /dev/null 1> /dev/null")
+        return_code = @platform.channel.sudo("grep '#{oracleasm_entry}' /etc/sysconfig/oracleasm 2> /dev/null 1> /dev/null")
         return_code.should eql(0)
       end
     end

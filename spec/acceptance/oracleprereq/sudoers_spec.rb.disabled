@@ -8,7 +8,7 @@ describe 'Default node for oracle' do
       sudoers_entry = "User_Alias ORADM = oracle"
 
       it "should contain #{sudoers_entry}" do
-      	return_code = @env.vms[:centos5].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+      	return_code = @platform.channel.sudo("grep -q '#{sudoers_entry}' /etc/sudoers.d/10_oracle")
       	return_code.should eql(0)
       end
     end
@@ -17,7 +17,7 @@ describe 'Default node for oracle' do
       sudoers_entry = "Cmnd_Alias ADM = /bin/su"
 
       it "should contain #{sudoers_entry}" do
-        return_code = @env.vms[:centos5].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code = @platform.channel.sudo("grep -q '#{sudoers_entry}' /etc/sudoers.d/10_oracle")
         return_code.should eql(0)
       end
     end
@@ -26,7 +26,7 @@ describe 'Default node for oracle' do
       sudoers_entry = "ORADM   ALL = ADM"
 
       it "should contain #{sudoers_entry}" do
-        return_code = @env.vms[:centos5].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code = @platform.channel.sudo("grep -q '#{sudoers_entry}' /etc/sudoers.d/10_oracle")
         return_code.should eql(0)
       end
     end
@@ -35,7 +35,7 @@ describe 'Default node for oracle' do
       sudoers_entry = "oracle ALL = NOPASSWD: MP,RESCAN"
 
       it "should contain #{sudoers_entry}" do
-        return_code = @env.vms[:centos5].channel.sudo("grep '#{sudoers_entry}' /etc/sudoers.d/10_oracle 2> /dev/null 1> /dev/null")
+        return_code = @platform.channel.sudo("grep -q  '#{sudoers_entry}' /etc/sudoers.d/10_oracle")
         return_code.should eql(0)
       end
     end
