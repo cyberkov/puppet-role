@@ -19,10 +19,10 @@ namespace "jenkins" do
       sleep 5
     end
 
-    Rake::Task["transform_puppet_reports"].invoke
+    Rake::Task["acceptance:transform_puppet_reports"].invoke
 
     report = "ci"
-    Rake::Task["spec"].invoke
+    Rake::Task["acceptance:spec"].invoke
   end
 
   desc "Fetch artifact from upstream project"
