@@ -17,6 +17,7 @@ Vagrant::Config.run do |config|
   config.vm.define :puppetmaster do |master|
     master.vm.box = "puppetmaster"
     master.vm.box_url = "https://yum.cegeka.be/vagrant/baseboxes/puppetmaster.box"
+    master.vm.forward_port(22, 12200)
     master.vm.network :hostonly, "172.16.0.2"
     master.vm.host_name = "puppetmaster.example.com"
     master.vmhosts.list = hosts
@@ -31,6 +32,7 @@ Vagrant::Config.run do |config|
   config.vm.define :centos6 do |node1|
     node1.vm.box = "puppetnode1-centos6-x86_64"
     node1.vm.box_url = "https://yum.cegeka.be/vagrant/baseboxes/puppetnode1-centos6-x86_64.box"
+    node1.vm.forward_port(22, 22200)
     node1.vm.network :hostonly, "172.16.0.3"
     node1.vm.host_name = "puppetnode1-centos6-x86_64.example.com"
     node1.vmhosts.list = hosts
@@ -43,6 +45,7 @@ Vagrant::Config.run do |config|
   config.vm.define :centos5 do |node2|
     node2.vm.box = "puppetnode2-centos5-x86_64"
     node2.vm.box_url = "https://yum.cegeka.be/vagrant/baseboxes/puppetnode2-centos5-x86_64.box"
+    node2.vm.forward_port(22, 32200)
     node2.vm.network :hostonly, "172.16.0.4"
     node2.vm.host_name = "puppetnode2-centos5-x86_64.example.com"
     node2.vmhosts.list = hosts
