@@ -15,8 +15,15 @@ namespace :acceptance do
 
     puts "Provisioning with version #{ENV['version']}"
 
-    ENV['boxes'].split(',').each { |basebox|
+    boxes ||= Array.new
+    boxes.push('puppetmaster')
+    boxes += ENV['boxes'].split(',')
+
+    boxes.each { |basebox|
       if ! env.vms[:"#{basebox}"].nil?
+        puts "Resuming #{basebox} ..."
+        env.cli("resume", :"#{basebox}")
+
         puts "Rolling back #{basebox} to known state..."
         env.cli("sandbox", "rollback", :"#{basebox}")
 

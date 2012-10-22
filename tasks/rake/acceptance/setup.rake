@@ -21,6 +21,10 @@ namespace :acceptance do
         puts "Creating snapshot of initial #{basebox} state..."
         env.cli("sandbox", "on", :"#{basebox}")
         puts "Snapshot created."
+
+        puts "Suspending #{basebox} ..."
+        env.cli("suspend", :"#{basebox}")
+        puts "VM suspended."
       else
         puts "Vagrant VM '#{basebox}' doesn't exist..."
       end

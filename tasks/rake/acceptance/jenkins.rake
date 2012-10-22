@@ -4,28 +4,25 @@ require File.expand_path('../../acceptance/env', __FILE__)
 namespace "jenkins" do
 
   desc "Provision the test environment and run acceptance RSpec tests"
-  task :run_acceptance_tests => [:provision] do
+  task :run_acceptance_tests => ["acceptance:provision"] do
     require 'vagrant'
 
     env = Vagrant::Environment.new(:cwd => File.expand_path('../../..', __FILE__),
 				   :ui_class => Vagrant::UI::Basic)
 
-    puppet_vms = ENV['boxes'].split(',')
-    puppet_vms.delete('puppetmaster')
+    box = ENV['boxes']
 
-    puppet_vms.each { |box|
-      puppetnode_fqdn = env.vms[:"#{box}"].config.vm.host_name
-      puts "Going to check if provisioning for puppet node #{puppetnode_fqdn} has finished."
-      until File.directory?("#{REPORTS_DIR}/#{puppetnode_fqdn}")
-        puts "Directory #{REPORTS_DIR}/#{puppetnode_fqdn} not yet available... Checking again in a few seconds..."
-        sleep 5
-      end
-    }
+    puppetnode_fqdn = env.vms[:"#{box}"].config.vm.host_name
+    puts "Going to check if provisioning for puppet node #{puppetnode_fqdn} has finished."
+    until File.directory?("#{REPORTS_DIR}/#{puppetnode_fqdn}")
+      puts "Directory #{REPORTS_DIR}/#{puppetnode_fqdn} not yet available... Checking again in a few seconds..."
+      sleep 5
+    end
 
-    Rake::Task["transform_puppet_reports"].invoke
+    Rake::Task["acceptance:transform_puppet_reports"].invoke
 
     report = "ci"
-    Rake::Task["spec"].invoke
+    Rake::Task["acceptance:spec"].invoke
   end
 
   desc "Fetch artifact from upstream project"
