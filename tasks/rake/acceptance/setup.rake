@@ -13,7 +13,7 @@ namespace :acceptance do
     boxes.push('puppetmaster')
     boxes += ENV['boxes'].split(',')
 
-    boxes.split(',').each { |basebox|
+    boxes.each { |basebox|
       if ! env.vms[:"#{basebox}"].nil?
         puts "Checking #{basebox} state..."
         state = env.vms[:"#{basebox}"].state
