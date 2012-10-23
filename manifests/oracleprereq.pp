@@ -5,7 +5,7 @@ class role::oracleprereq {
 
   class { 'cegekarepos': stage => 'pre' }
   class { 'cegekausers': }
-  class { 'oracleprereq': }
+  class { '::oracleprereq': }
   class { 'limits': }
   class { 'common::sysadmintools': }
 
