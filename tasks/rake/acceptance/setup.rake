@@ -24,6 +24,7 @@ namespace :acceptance do
             env.cli("up", :"#{basebox}")
           else
             env.cli("up", :"#{basebox}", "--no-provision")
+          end
         end
         puts "#{basebox} is running..."
 
