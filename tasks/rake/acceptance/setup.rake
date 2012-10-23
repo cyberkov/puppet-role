@@ -9,22 +9,28 @@ namespace :acceptance do
     env = Vagrant::Environment.new(:cwd => File.expand_path('../../..', __FILE__),
                                    :ui_class => Vagrant::UI::Basic)
 
+    boxes ||= Array.new
+    boxes.push('puppetmaster')
+    boxes += ENV['boxes'].split(',')
+
     ENV['boxes'].split(',').each { |basebox|
       if ! env.vms[:"#{basebox}"].nil?
         puts "Checking #{basebox} state..."
         state = env.vms[:"#{basebox}"].state
 
         puts "Setting up #{basebox}..."
-        env.cli("up", :"#{basebox}", "--no-provision") if ! (state == :running)
+        if ! (state == :running)
+          if ("#{basebox}" == 'puppetmaster')
+            env.cli("up", :"#{basebox}")
+          else
+            env.cli("up", :"#{basebox}", "--no-provision")
+        end
         puts "#{basebox} is running..."
 
         puts "Creating snapshot of initial #{basebox} state..."
         env.cli("sandbox", "on", :"#{basebox}")
         puts "Snapshot created."
 
-        puts "Suspending #{basebox} ..."
-        env.cli("suspend", :"#{basebox}")
-        puts "VM suspended."
       else
         puts "Vagrant VM '#{basebox}' doesn't exist..."
       end
