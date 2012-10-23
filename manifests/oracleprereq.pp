@@ -6,7 +6,6 @@ class role::oracleprereq {
   class { 'cegekarepos': stage => 'pre' }
   class { 'cegekausers': }
   class { '::oracleprereq': }
-  class { 'limits': }
   class { 'common::sysadmintools': }
 
   Yum::Repo <| title == 'os' |>
