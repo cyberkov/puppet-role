@@ -21,6 +21,7 @@ namespace :acceptance do
         puts "Setting up #{basebox}..."
         if ! (state == :running)
           if ("#{basebox}" == 'puppetmaster')
+            FileUtils.mkpath("#{REPORTS_DIR}")
             env.cli("up", :"#{basebox}")
           else
             env.cli("up", :"#{basebox}", "--no-provision")
