@@ -10,7 +10,7 @@ class role::tomcat {
   Yum::Repo <| title == 'cegeka-noarch-unstable' |>
   Yum::Repo <| title == 'cegeka-unsigned' |>
 
-  class { 'tomcat': }
+  class { '::tomcat': }
 
   tomcat::conf::setenv { 'setting env':
     java_options => [
