@@ -14,7 +14,7 @@ describe 'Default node for oracle' do
     end
 
     it "should have a group '#{oracle_primary_group}'" do
-      return_code = @platform.channel.sudo(" /etc/group | grep #{oracle_primary_group} 2> /dev/null 1> /dev/null")
+      return_code = @platform.channel.sudo("cat /etc/group | grep #{oracle_primary_group} 2> /dev/null 1> /dev/null")
       return_code.should eql(0)
     end
 
