@@ -5,7 +5,7 @@ describe 'Default node for tomcat' do
   context "when node definition is tomcat" do
 
     context "Checking required packages" do
-      packages = ['tomcat']
+      packages = ['cegeka-tomcat6']
 
       packages.each { |package|
         it "should contain package #{package}" do
