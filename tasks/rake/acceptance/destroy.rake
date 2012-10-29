@@ -9,7 +9,11 @@ namespace :acceptance do
     env = Vagrant::Environment.new(:cwd => File.expand_path('../../..', __FILE__),
                                    :ui_class => Vagrant::UI::Basic)
 
-    ENV['boxes'].split(',').each { |basebox|
+    boxes ||= Array.new
+    boxes.push('puppetmaster')
+    boxes += ENV['boxes'].split(',')
+
+    boxes.each { |basebox|
       if ! env.vms[:"#{basebox}"].nil?
         puts "Removing #{basebox} snapshot..."
         env.cli("sandbox", "off", :"#{basebox}")
