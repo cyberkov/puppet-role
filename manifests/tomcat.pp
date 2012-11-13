@@ -12,6 +12,7 @@ class role::tomcat {
   Yum::Repo <| title == 'os' |>
   Yum::Repo <| title == 'updates' |>
   Yum::Repo <| title == 'optional' |>
+  Yum::Repo <| title == 'cegeka-public' |>
   Yum::Repo <| title == 'cegeka-noarch-unstable' |>
   Yum::Repo <| title == 'cegeka-unsigned-i386' |>
   Yum::Repo <| title == 'newrelic' |>
